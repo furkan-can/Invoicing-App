@@ -1,27 +1,18 @@
 .invoice-card {
-  height: 130px;
+  height: 11rem;
   width: 95%;
   margin: 10px auto;
 
   .content {
     display: flex;
 
-    .invoice-card-header {
-      .text {
-        font-size: 14px;
-        height: 30px;
-      }
+    .text {
+      font-size: 14px;
+      height: 30px;
     }
 
-    span{
-        font-weight: bold;
-    }
-
-    .invoice-card-body {
-      .text {
-        font-size: 14px;
-        height: 30px;
-      }
+    span {
+      font-weight: bold;
     }
   }
 
