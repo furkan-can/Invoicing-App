@@ -1,0 +1,24 @@
+.home-page {
+  width: 100%;
+  height: calc(100% - 60px);
+  .container {
+    display: flex;
+    flex-direction: row;
+    flex: 3;
+
+    .invoice-container {
+      flex: 1;
+      background-color: gainsboro;
+    }
+
+    .scroll{
+      overflow-y: scroll;
+
+    }
+
+    .home-container {
+      flex: 2;
+      background-color: whitesmoke;
+    }
+  }
+}
