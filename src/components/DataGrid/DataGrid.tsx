@@ -52,7 +52,6 @@ export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
     }
 
     function subtotal(items: readonly IInvoiceDetail[]) {
-        console.log(items);
         return items.map((item) => item.price).reduce((sum, i) => sum + i, 0);
     }
 

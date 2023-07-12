@@ -1,0 +1,10 @@
+.table-container {
+  max-height: 295px;
+  padding: 0;
+  margin: 0;
+  .scroll {
+    max-height: 295px;
+
+    overflow-y: auto;
+  }
+}

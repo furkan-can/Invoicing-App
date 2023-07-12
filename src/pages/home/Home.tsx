@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '$c/home/Navbar/navbar';
 import './home.scss';
 import InvoiceBar from '$c/InvoiceBar/invoicebar';
@@ -7,8 +7,21 @@ import InvoiceDetails from '$c/Invoice-Details/InvoiceDetails';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import CreateInvoice from '$c/CreateInvoice/CreateInvoice';
+
 
 export default function Home() {
+
+    const [isComponentOpen, setComponentOpen] = useState(false);
+
+    const openComponent = () => {
+        setComponentOpen(true);
+    };
+
+    const closeComponent = () => {
+        setComponentOpen(false);
+    };
+
     return (
         <div className='home-page'>
             <Navbar />
@@ -20,12 +33,12 @@ export default function Home() {
                 <div className='home-container'>
                     <div className='floating-bar'>
                         <Box sx={{ '& > :not(style)': { m: 1 } }}>
-                            <Fab color="primary" aria-label="add">
+                            <Fab color="primary" aria-label="add" onClick={openComponent}>
                                 <AddIcon />
                             </Fab>
                         </Box>
                     </div>
-                    <InvoiceDetails />
+                    {isComponentOpen ? <CreateInvoice onClose={closeComponent} /> : <InvoiceDetails />}
 
                 </div>
 
