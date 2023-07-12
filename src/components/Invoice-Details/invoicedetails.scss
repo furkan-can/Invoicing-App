@@ -28,10 +28,16 @@
         display: flex;
         flex-direction: column;
         .btn-print {
-          width: min-content;
-          height: 30px;
-          font-size: 14px;
+          padding: 20px;
+          width: max-content;
+          height: 60px;
+          font-size: 12px;
           font-weight: bold;
+          margin-left: 10px;
+        }
+
+        .btn-print:first-child {
+          flex-wrap: wrap;
         }
 
         .top {

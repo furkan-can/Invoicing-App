@@ -4,8 +4,69 @@ import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 
 import './invoicedetails.scss';
+import { DataGrid } from '$c/DataGrid/DataGrid';
+
+export interface IInvoiceDetail {
+    desc: string;
+    qty: number;
+    unit: number;
+    price?: number;
+}
 
 export default function InvoiceDetails() {
+
+
+
+    const invoiceData: IInvoiceDetail[] = [
+        {
+            desc: "Pencil",
+            qty: 2,
+            unit: 10,
+        },
+        {
+            desc: "Pencil2",
+            qty: 1,
+            unit: 1000,
+        },
+        {
+            desc: "Pencil3",
+            qty: 1,
+            unit: 1000,
+        },
+
+        {
+            desc: "Pencil5",
+            qty: 1,
+            unit: 1000,
+        },
+        {
+            desc: "Pencil6",
+            qty: 1,
+            unit: 1000,
+        },
+        {
+            desc: "Pencil334",
+            qty: 1,
+            unit: 1000,
+        },
+        {
+            desc: "Pencil32",
+            qty: 1,
+            unit: 1000,
+        },
+
+        {
+            desc: "Pencil33344",
+            qty: 1,
+            unit: 1000,
+        },
+        {
+            desc: "Pencil3342",
+            qty: 1,
+            unit: 1000,
+        },
+
+    ];
 
 
     return (
@@ -31,12 +92,14 @@ export default function InvoiceDetails() {
                                 <span>STATUS</span>
                                 <span>Paid</span>
                             </div>
-                            <Button className='btn-print' variant='contained' size="medium">Print</Button>
+                            <Button className='btn-print' variant='contained' size="medium">Payment Received</Button>
+                            <Button className='btn-print' color='success' variant='contained' size="medium">Print</Button>
+
 
                         </div>
                         <div className='divider'></div>
                         <div>
-                            {/* Data Tablosu Gelecek Buraya unutma */}
+                            <DataGrid data={invoiceData} />
                         </div>
                         <div></div>
                     </div>

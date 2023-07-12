@@ -11,14 +11,20 @@
       background-color: gainsboro;
     }
 
-    .scroll{
-      overflow-y: scroll;
-
+    .scroll {
+      overflow-y: auto;
     }
 
     .home-container {
       flex: 2;
       background-color: whitesmoke;
+
+      .floating-bar {
+        text-align: end;
+        position: fixed;
+        right: 40px;
+        top:calc(100% - 85px);
+      }
     }
   }
 }
