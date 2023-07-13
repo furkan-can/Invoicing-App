@@ -57,6 +57,16 @@
             border-radius: 4px;
             font-size: 14px;
           }
+
+          select{
+            font-size: 14px;
+            width: 50%;
+            height: 40px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+          }
         }
       }
 
@@ -109,9 +119,18 @@
 
       .btn-submit{
         width: 150px;
-        height: 100px;
+        height: 50px;
         font-size: 14px;
         margin-top:70px ;
+        align-self: center;
+        
+      }
+
+      .btn-back{
+        width: 150px;
+        height: 50px;
+        font-size: 14px;
+        margin-top:20px ;
         align-self: center;
         
       }
