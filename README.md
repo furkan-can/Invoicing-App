@@ -18,19 +18,29 @@ Price Calculations: The application automatically calculates the total cost of e
 To run the Invoicing Web Page locally, follow these steps:
 
 Clone the repository: git clone this project
+
 Navigate to the project directory: cd invoicing-app
+
 Install dependencies: npm install
+
 Start the application: npm start
+
 Access the application in your web browser at http://localhost:3000
 
 ## Technologies Used
 The Invoicing Web Page project utilizes the following technologies:
 
 HTML and CSS for the user interface design
+
 JavaScript for client-side functionality and interactivity
+
 React.js as the front-end JavaScript library
+
 Bootstrap for responsive and mobile-first styling
+
 Babel for transpiling modern JavaScript syntax to ensure compatibility with older browsers
+
 Webpack for bundling and optimizing the project's assets and resources
+
 Other dependencies managed by npm package manager
 
