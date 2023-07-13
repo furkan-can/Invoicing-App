@@ -2,6 +2,10 @@
 
 Invoicing web page is the front-end part. This project offers a simple interface to add invoices, search existing invoices, track invoice status, and view details. In addition, the invoice shows the total cost by making price calculations including taxes.
 
+## Usage
+
+Local storage is used as it is not tied to the backend. You can try the demo.
+
 ## Demo
 
 https://invoicing-app-wng8.vercel.app/
