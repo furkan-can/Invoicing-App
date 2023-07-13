@@ -5,68 +5,11 @@ import Button from '@mui/material/Button';
 
 import './invoicedetails.scss';
 import { DataGrid } from '$c/DataGrid/DataGrid';
-
-export interface IInvoiceDetail {
-    desc: string;
-    qty: number;
-    unit: number;
-    price?: number;
-}
-
-export default function InvoiceDetails() {
+import { useLocation } from 'react-router-dom';
 
 
-
-    const invoiceData: IInvoiceDetail[] = [
-        {
-            desc: "Pencil",
-            qty: 2,
-            unit: 10,
-        },
-        {
-            desc: "Pencil2",
-            qty: 1,
-            unit: 1000,
-        },
-        {
-            desc: "Pencil3",
-            qty: 1,
-            unit: 1000,
-        },
-
-        {
-            desc: "Pencil5",
-            qty: 1,
-            unit: 1000,
-        },
-        {
-            desc: "Pencil6",
-            qty: 1,
-            unit: 1000,
-        },
-        {
-            desc: "Pencil334",
-            qty: 1,
-            unit: 1000,
-        },
-        {
-            desc: "Pencil32",
-            qty: 1,
-            unit: 1000,
-        },
-
-        {
-            desc: "Pencil33344",
-            qty: 1,
-            unit: 1000,
-        },
-        {
-            desc: "Pencil3342",
-            qty: 1,
-            unit: 1000,
-        },
-
-    ];
+const InvoiceDetails = () => {
+    const invoiceList = useLocation().state;
 
 
     return (
@@ -80,13 +23,13 @@ export default function InvoiceDetails() {
                         <div className='top'>
                             <div className='top-content'>
                                 <span>INVOICE</span>
-                                <span>#-0001</span>
-                                <span>12/12/2021 16:00</span>
+                                <span>{invoiceList.invoiceID}</span>
+                                <span>{invoiceList.billDescription.descriptionDate}</span>
                             </div>
                             <div className='top-content'>
                                 <span>CUSTOMER DETAILS</span>
-                                <span>Furkan Kaya</span>
-                                <span>furkankaya@gmail.com</span>
+                                <span>{invoiceList.billTo.billToName}</span>
+                                <span>{invoiceList.billTo.billToEmail}</span>
                             </div>
                             <div className='top-content'>
                                 <span>STATUS</span>
@@ -99,7 +42,7 @@ export default function InvoiceDetails() {
                         </div>
                         <div className='divider'></div>
                         <div>
-                            <DataGrid data={invoiceData} />
+                            <DataGrid data={invoiceList} />
                         </div>
                         <div></div>
                     </div>
@@ -108,3 +51,5 @@ export default function InvoiceDetails() {
         </div>
     );
 }
+
+export default InvoiceDetails;

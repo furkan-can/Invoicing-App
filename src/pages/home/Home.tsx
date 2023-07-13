@@ -9,9 +9,12 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import CreateInvoice from '$c/CreateInvoice/CreateInvoice';
 
+interface HomeProps {
+    status: boolean;
+}
 
-export default function Home() {
-
+const Home: React.FC<HomeProps> = ({ status }) => {
+    console.log(status);
     const [isComponentOpen, setComponentOpen] = useState(false);
 
     const openComponent = () => {
@@ -37,8 +40,11 @@ export default function Home() {
                                 <AddIcon />
                             </Fab>
                         </Box>
-                    </div>
-                    {isComponentOpen ? <CreateInvoice onClose={closeComponent} /> : <InvoiceDetails />}
+                    </div>{isComponentOpen ? (
+                        <CreateInvoice onClose={closeComponent} />
+                    ) : (
+                        status ? <NotSelectedInvoice /> : <InvoiceDetails />
+                    )}
 
                 </div>
 
@@ -47,3 +53,5 @@ export default function Home() {
         </div>
     );
 }
+
+export default Home;

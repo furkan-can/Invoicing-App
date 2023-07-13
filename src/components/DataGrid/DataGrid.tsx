@@ -7,10 +7,10 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import { IInvoiceDetail } from '$c/Invoice-Details/InvoiceDetails';
+import { IInvoice } from '../../Interfaces/interface';
 
 interface DataTableProps {
-    data: IInvoiceDetail[];
+    data: IInvoice;
 }
 
 const TAX_RATE = 0.07;
@@ -19,41 +19,30 @@ const TAX_RATE = 0.07;
 
 
 export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
-    const [rows, setRows] = useState<IInvoiceDetail[]>([]);
-    const [invoiceSubtotal, setInvoiceSubtotal] = useState<number>(0);
     const [invoiceTaxes, setInvoiceTaxes] = useState<number>(0);
     const [invoiceTotal, setInvoiceTotal] = useState<number>(0);
 
-    useEffect(() => {
-        const updatedRows = calculatePriceAll(data);
-        setRows(updatedRows);
-        setInvoiceSubtotal(subtotal(updatedRows));
-    }, [data]);
 
     useEffect(() => {
-        setInvoiceTaxes(TAX_RATE * invoiceSubtotal);
-        setInvoiceTotal(invoiceTaxes + invoiceSubtotal);
-    }, [invoiceSubtotal, invoiceTaxes]);
+        setInvoiceTaxes(TAX_RATE * calculatePriceAll());
+        setInvoiceTotal(invoiceTaxes + calculatePriceAll());
+    }, [invoiceTaxes]);
 
-    function calculatePrice(qty: number, unit: number) {
-        return qty * unit;
-    }
+    function calculatePriceAll() {
+        let price = 0;
+        data.items.reduce((acc, item) => {
+            price += item.listtotalPrice;
 
-    function calculatePriceAll(rows: IInvoiceDetail[]) {
-        return rows.map((row) => {
-            const price = calculatePrice(row.qty, row.unit);
-            return { ...row, price };
-        });
-
+            return acc;
+        }, 0);
+        return price;
     }
 
     function ccyFormat(num: number) {
         return `${num.toFixed(2)}`;
     }
 
-    function subtotal(items: readonly IInvoiceDetail[]) {
-        return items.map((item) => item.price).reduce((sum, i) => sum + i, 0);
-    }
+    
 
     return (
         <>
@@ -74,12 +63,12 @@ export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
                         </TableRow>
                     </TableHead>
                     <TableBody className='tbody'>
-                        {rows.map((row) => (
-                            <TableRow key={row.desc} className='row'>
-                                <TableCell className='text'>{row.desc}</TableCell>
-                                <TableCell className='text' align="right">{row.qty}</TableCell>
-                                <TableCell className='text' align="right">{row.unit}</TableCell>
-                                <TableCell className='text' align="right">{ccyFormat(row.price)}</TableCell>
+                        {data.items.map((row) => (
+                            <TableRow key={row.listProductServiceDescription} className='row'>
+                                <TableCell className='text'>{row.listProductServiceDescription}</TableCell>
+                                <TableCell className='text' align="right">{row.listAmount}</TableCell>
+                                <TableCell className='text' align="right">{row.listUnitPrice}</TableCell>
+                                <TableCell className='text' align="right">{ccyFormat(row.listtotalPrice)}</TableCell>
                             </TableRow>
                         ))}
 
@@ -95,7 +84,7 @@ export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
                     <span className='subheader'>Total</span>
                 </div>
                 <div>
-                    <span className='text'>{ccyFormat(invoiceSubtotal)}</span>
+                    <span className='text'>{ccyFormat(calculatePriceAll())}</span>
                     <span className='text'>{`${(TAX_RATE * 100).toFixed(0)}%`}&nbsp;&nbsp;{ccyFormat(invoiceTaxes)}</span>
                     <span className='text'>{ccyFormat(invoiceTotal)}</span>
 

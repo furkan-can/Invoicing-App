@@ -4,6 +4,7 @@ import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import './invoicecard.scss';
 import { IInvoice, IInvoiceList } from '../../Interfaces/interface';
+import { useNavigate } from "react-router-dom";
 
 interface InvoiceCardProps {
     invoice: IInvoiceList;
@@ -13,6 +14,11 @@ interface InvoiceCardProps {
 
 
 const InvoiceCard: React.FC<InvoiceCardProps> = ({ invoice, status, invoiceList }) => {
+    const navigate = useNavigate();
+
+    function onCardClick(selected: IInvoice) {
+        navigate(`/${selected.invoiceID}`, { state: selected });
+    }
 
     function calculatebillPrice() {
         let price = 0;
@@ -49,7 +55,7 @@ const InvoiceCard: React.FC<InvoiceCardProps> = ({ invoice, status, invoiceList 
             );
         } else {
             return (
-                <Card className='invoice-card'>
+                <Card className='invoice-card' onClick={() => onCardClick(invoiceList)}>
                     <CardContent className='content'>
                         <div className='invoice-card-header'>
                             <Typography className='text'>
