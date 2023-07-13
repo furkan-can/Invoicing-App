@@ -12,7 +12,6 @@ import { IInvoice } from '../../Interfaces/interface';
 const InvoiceDetails = () => {
     const invoice = useLocation().state;
     const [selectedInvoice, setSelectedInvoice] = React.useState<IInvoice>(invoice);
-    const [isPaid, setIsPaid] = React.useState(false);
     const [invoiceList, setInvoiceList] = React.useState<IInvoice[]>(localStorage.getItem('invoice') ? JSON.parse(localStorage.getItem('invoice')) : []);
 
     React.useEffect(() => {
@@ -27,8 +26,12 @@ const InvoiceDetails = () => {
                 invoiceList[index] = updatedInvoice;
             }
         });
-        setIsPaid(true);
         localStorage.setItem('invoice', JSON.stringify(invoiceList));
+        (window as Window).location.reload();
+    }
+
+    function mail() {
+        alert('Post successfully sent to invoice owners email address');
     }
 
 
@@ -56,7 +59,7 @@ const InvoiceDetails = () => {
                                 <span>{selectedInvoice.status}</span>
                             </div>
                             <Button onClick={paid} disabled={selectedInvoice.status.includes("Paid")} className='btn-print' variant='contained' size="medium">Payment Received</Button>
-                            <Button className='btn-print' color='success' variant='contained' size="medium">Print</Button>
+                            <Button onClick={mail} className='btn-print' color='success' variant='contained' size="medium">EMail</Button>
 
 
                         </div>

@@ -55,7 +55,8 @@ const InvoiceCard: React.FC<InvoiceCardProps> = ({ invoice, status, invoiceList 
             );
         } else {
             return (
-                <Card className='invoice-card' onClick={() => onCardClick(invoiceList)}>
+                <Card className={`invoice-card ${invoiceList.status === 'outstanding' ? 'status-outstanding' : invoiceList.status === 'Paid' ? 'status-paid' : 'status-late'}`}
+                    onClick={() => onCardClick(invoiceList)}>
                     <CardContent className='content'>
                         <div className='invoice-card-header'>
                             <Typography className='text'>

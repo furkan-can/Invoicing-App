@@ -10,8 +10,42 @@ export default function InvoiceBar() {
 
     useEffect(() => {
         try {
-            const invoicesList = localStorage.getItem('invoice') || '[]';
-            const parsedInvoices = JSON.parse(invoicesList);
+            let invoicesList: IInvoice[] = localStorage.getItem('invoice')
+                ? JSON.parse(localStorage.getItem('invoice'))
+                : [];
+            const today = new Date();
+            const date = today.getDate();
+
+            const filteredItems = invoicesList.filter((item: IInvoice) => {
+                return new Date(item.billDescription.descriptionDate).getDate() < date && item.status === 'outstanding';
+            });
+
+            filteredItems.forEach((item: IInvoice) => {
+                item.status = 'late';
+            });
+
+
+            const mergedItems = invoicesList.map((item: IInvoice) => {
+                const filteredItem = filteredItems.find((filteredItem) => filteredItem.invoiceID === item.invoiceID);
+                if (filteredItem) {
+                    return { ...item, status: filteredItem.status };
+                }
+                return item;
+            });
+
+            console.log(mergedItems);
+
+            localStorage.setItem('invoice', JSON.stringify(mergedItems));
+
+            invoicesList = localStorage.getItem('invoice')
+                ? JSON.parse(localStorage.getItem('invoice'))
+                : [];
+
+
+
+            const parsedInvoices: IInvoice[] = invoicesList;
+
+
 
             if (Array.isArray(parsedInvoices)) {
                 return setInvoices(parsedInvoices); // Return the updated state

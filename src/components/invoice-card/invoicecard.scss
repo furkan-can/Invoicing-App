@@ -6,6 +6,7 @@
   .content {
     display: flex;
     gap: 15px;
+
     .text {
       font-size: 14px;
       height: 30px;
@@ -21,4 +22,18 @@
     background-color: bisque;
     cursor: pointer;
   }
+ 
+}
+
+
+.status-outstanding {
+  background-color: lightblue !important;
+}
+
+.status-paid {
+  background-color: lightgreen !important;
+}
+
+.status-late {
+  background-color: lightcoral !important;
 }

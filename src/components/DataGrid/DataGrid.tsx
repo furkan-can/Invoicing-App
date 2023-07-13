@@ -38,13 +38,13 @@ export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
         return calculatePriceAll() + calculateTax();
     }
 
-    
+
 
     function ccyFormat(num: number) {
         return `${num.toFixed(2)}`;
     }
 
-    
+
 
     return (
         <>
@@ -58,19 +58,19 @@ export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
                             <TableCell className='header' align="right">Price</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell className='subheader'>Desc</TableCell>
-                            <TableCell className='subheader' align="right">Qty.</TableCell>
-                            <TableCell className='subheader' align="right">Unit</TableCell>
-                            <TableCell className='subheader' align="right">Sum</TableCell>
+                            <TableCell className='subheader' >Desc</TableCell>
+                            <TableCell className='subheader' >Qty.</TableCell>
+                            <TableCell className='subheader' >Unit</TableCell>
+                            <TableCell className='subheader' >Sum</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody className='tbody'>
                         {data.items.map((row) => (
                             <TableRow key={row.listProductServiceDescription} className='row'>
-                                <TableCell className='text'>{row.listProductServiceDescription}</TableCell>
-                                <TableCell className='text' align="right">{row.listAmount}</TableCell>
-                                <TableCell className='text' align="right">{row.listUnitPrice}</TableCell>
-                                <TableCell className='text' align="right">{ccyFormat(row.listtotalPrice)}</TableCell>
+                                <TableCell className='text' >{row.listProductServiceDescription}</TableCell>
+                                <TableCell className='text' >{row.listAmount}</TableCell>
+                                <TableCell className='text' >{row.listUnitPrice}</TableCell>
+                                <TableCell className='text' >{ccyFormat(row.listtotalPrice)}</TableCell>
                             </TableRow>
                         ))}
 
