@@ -19,14 +19,6 @@ const TAX_RATE = 0.07;
 
 
 export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
-    const [invoiceTaxes, setInvoiceTaxes] = useState<number>(0);
-    const [invoiceTotal, setInvoiceTotal] = useState<number>(0);
-
-
-    useEffect(() => {
-        setInvoiceTaxes(TAX_RATE * calculatePriceAll());
-        setInvoiceTotal(invoiceTaxes + calculatePriceAll());
-    }, [invoiceTaxes]);
 
     function calculatePriceAll() {
         let price = 0;
@@ -37,6 +29,16 @@ export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
         }, 0);
         return price;
     }
+
+    function calculateTax() {
+        return TAX_RATE * calculatePriceAll();
+    }
+
+    function calculateTaxPrice() {
+        return calculatePriceAll() + calculateTax();
+    }
+
+    
 
     function ccyFormat(num: number) {
         return `${num.toFixed(2)}`;
@@ -85,8 +87,8 @@ export const DataGrid: React.FC<DataTableProps> = ({ data }) => {
                 </div>
                 <div>
                     <span className='text'>{ccyFormat(calculatePriceAll())}</span>
-                    <span className='text'>{`${(TAX_RATE * 100).toFixed(0)}%`}&nbsp;&nbsp;{ccyFormat(invoiceTaxes)}</span>
-                    <span className='text'>{ccyFormat(invoiceTotal)}</span>
+                    <span className='text'>{`${(TAX_RATE * 100).toFixed(0)}%`}&nbsp;&nbsp;{ccyFormat(calculateTax())}</span>
+                    <span className='text'>{ccyFormat(calculateTaxPrice())}</span>
 
                 </div>
             </div>

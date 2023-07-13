@@ -62,7 +62,7 @@ const InvoiceCard: React.FC<InvoiceCardProps> = ({ invoice, status, invoiceList 
                                 <span>INV. ID:</span> {invoiceList.invoiceID}
                             </Typography>
                             <Typography className='text'>
-                                <span>Status:</span> Waiting
+                                <span>Status:</span> {invoiceList.status}
                             </Typography>
                             <Typography className='text'>
                                 <span>Customer:</span> {invoiceList.billTo.billToName}

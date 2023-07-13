@@ -6,10 +6,30 @@ import Button from '@mui/material/Button';
 import './invoicedetails.scss';
 import { DataGrid } from '$c/DataGrid/DataGrid';
 import { useLocation } from 'react-router-dom';
+import { IInvoice } from '../../Interfaces/interface';
 
 
 const InvoiceDetails = () => {
-    const invoiceList = useLocation().state;
+    const invoice = useLocation().state;
+    const [selectedInvoice, setSelectedInvoice] = React.useState<IInvoice>(invoice);
+    const [isPaid, setIsPaid] = React.useState(false);
+    const [invoiceList, setInvoiceList] = React.useState<IInvoice[]>(localStorage.getItem('invoice') ? JSON.parse(localStorage.getItem('invoice')) : []);
+
+    React.useEffect(() => {
+        setSelectedInvoice(invoice);
+    }, [invoice]);
+
+    function paid() {
+        const updatedInvoice = { ...invoice, status: 'Paid' };
+        setSelectedInvoice(updatedInvoice);
+        invoiceList.map((item: any, index: number) => {
+            if (item.invoiceID === invoice.invoiceID) {
+                invoiceList[index] = updatedInvoice;
+            }
+        });
+        setIsPaid(true);
+        localStorage.setItem('invoice', JSON.stringify(invoiceList));
+    }
 
 
     return (
@@ -23,26 +43,26 @@ const InvoiceDetails = () => {
                         <div className='top'>
                             <div className='top-content'>
                                 <span>INVOICE</span>
-                                <span>{invoiceList.invoiceID}</span>
-                                <span>{invoiceList.billDescription.descriptionDate}</span>
+                                <span>{selectedInvoice.invoiceID}</span>
+                                <span>{selectedInvoice.billDescription.descriptionDate}</span>
                             </div>
                             <div className='top-content'>
                                 <span>CUSTOMER DETAILS</span>
-                                <span>{invoiceList.billTo.billToName}</span>
-                                <span>{invoiceList.billTo.billToEmail}</span>
+                                <span>{selectedInvoice.billTo.billToName}</span>
+                                <span>{selectedInvoice.billTo.billToEmail}</span>
                             </div>
                             <div className='top-content'>
                                 <span>STATUS</span>
-                                <span>Paid</span>
+                                <span>{selectedInvoice.status}</span>
                             </div>
-                            <Button className='btn-print' variant='contained' size="medium">Payment Received</Button>
+                            <Button onClick={paid} disabled={selectedInvoice.status.includes("Paid")} className='btn-print' variant='contained' size="medium">Payment Received</Button>
                             <Button className='btn-print' color='success' variant='contained' size="medium">Print</Button>
 
 
                         </div>
                         <div className='divider'></div>
                         <div>
-                            <DataGrid data={invoiceList} />
+                            <DataGrid data={selectedInvoice} />
                         </div>
                         <div></div>
                     </div>

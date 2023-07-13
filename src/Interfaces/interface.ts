@@ -1,5 +1,6 @@
 export interface IInvoice {
   invoiceID: number;
+  status: string;
   billFrom: {
     billFromStreetAddress: string;
     billFromCity: string;

@@ -10,6 +10,7 @@ interface ComponentProps {
 
 const initialInvoiceState: IInvoice = {
     invoiceID: 0,
+    status: 'outstanding',
     billFrom: {
         billFromStreetAddress: '',
         billFromCity: '',

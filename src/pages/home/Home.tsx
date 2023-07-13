@@ -14,7 +14,6 @@ interface HomeProps {
 }
 
 const Home: React.FC<HomeProps> = ({ status }) => {
-    console.log(status);
     const [isComponentOpen, setComponentOpen] = useState(false);
 
     const openComponent = () => {
