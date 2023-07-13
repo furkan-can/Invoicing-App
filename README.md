@@ -2,6 +2,10 @@
 
 Invoicing web page is the front-end part. This project offers a simple interface to add invoices, search existing invoices, track invoice status, and view details. In addition, the invoice shows the total cost by making price calculations including taxes.
 
+## Demo
+
+https://invoicing-app-wng8.vercel.app/
+
 ## Features
 
 Add Invoices: Users can easily add new invoices by providing the necessary details such as customer information, item description, quantity, unit price, and tax rate. The application validates the input data to ensure accuracy.
