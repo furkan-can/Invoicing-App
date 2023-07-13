@@ -3,16 +3,26 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import './invoicecard.scss';
-import { IInvoiceList } from '../../Interfaces/interface';
+import { IInvoice, IInvoiceList } from '../../Interfaces/interface';
 
 interface InvoiceCardProps {
     invoice: IInvoiceList;
     status: boolean;
-
+    invoiceList: IInvoice;
 }
 
 
-const InvoiceCard: React.FC<InvoiceCardProps> = ({ invoice, status }) => {
+const InvoiceCard: React.FC<InvoiceCardProps> = ({ invoice, status, invoiceList }) => {
+
+    function calculatebillPrice() {
+        let price = 0;
+        invoiceList.items.reduce((acc, item) => {
+            price += item.listtotalPrice;
+
+            return acc;
+        }, 0);
+        return price;
+    }
     {
         if (status) {
             return (
@@ -43,24 +53,24 @@ const InvoiceCard: React.FC<InvoiceCardProps> = ({ invoice, status }) => {
                     <CardContent className='content'>
                         <div className='invoice-card-header'>
                             <Typography className='text'>
-                                <span>INV. ID:</span> #-0001
+                                <span>INV. ID:</span> {invoiceList.invoiceID}
                             </Typography>
                             <Typography className='text'>
-                                <span>Status:</span> Unpaid
+                                <span>Status:</span> Waiting
                             </Typography>
                             <Typography className='text'>
-                                <span>Customer:</span> Furkan Kaya
+                                <span>Customer:</span> {invoiceList.billTo.billToName}
                             </Typography>
                         </div>
                         <div className='invoice-card-body'>
                             <Typography className='text'>
-                                <span>Date:</span> 12/12/2021
+                                <span>Date:</span> {invoiceList.billDescription.descriptionDate}
                             </Typography>
                             <Typography className='text'>
-                                <span>Title:</span> 16:00
+                                <span>Title:</span> {invoiceList.billDescription.descriptionBillTitle}
                             </Typography>
                             <Typography className='text'>
-                                <span>Price:</span> $ 1000
+                                <span>Price:</span> {calculatebillPrice()}
                             </Typography>
                         </div>
                     </CardContent>

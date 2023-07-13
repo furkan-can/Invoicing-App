@@ -132,11 +132,13 @@ const CreateInvoice: React.FC<ComponentProps> = ({ onClose }) => {
         prepareInvoice();
     }, [invoicePartial]);
 
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
-        console.log(invoice);
-        localStorage.setItem('invoice', JSON.stringify(invoice));
+        const invoiceT = localStorage.getItem('invoice') ? JSON.parse(localStorage.getItem('invoice')) : [];
+        invoiceT.push(invoice);
+        localStorage.setItem('invoice', JSON.stringify(invoiceT));
         localStorage.removeItem('invoiceList');
         setIsDisabled(true);
         onClose();
@@ -295,7 +297,7 @@ const CreateInvoice: React.FC<ComponentProps> = ({ onClose }) => {
                 <div className='content'>
                     <div className='left'>
                         <button disabled={isDisabled} className='btn-submit' type="submit">Save Invoice</button>
-                        <button  className='btn-back' onClick={onClose}>Back</button>
+                        <button className='btn-back' onClick={onClose}>Back</button>
 
                     </div>
                     <div className='table'>

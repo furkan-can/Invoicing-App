@@ -14,7 +14,7 @@ const InvoiceTable: React.FC<InvoiceTableProps> = ({ invoices }) => {
             <div className='scroll'>
                 {
                     invoices.map((invoice) => (
-                        <InvoiceCard key={invoice.listProductServiceDescription} invoice={invoice} status={true} />
+                        <InvoiceCard key={invoice.listProductServiceDescription} invoice={invoice} status={true} invoiceList={[]} />
                     ))
                 }
             </div>
